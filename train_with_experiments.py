@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import root_mean_squared_error
 
 import mlflow
+import mlflow.sklearn
 from mlflow.tracking import MlflowClient
 
 # Initialize tracking URI
@@ -35,10 +36,8 @@ def train_model(experiment_name, model_class, params, X_train, y_train, X_val, y
         model = model_class(**params)
         model.fit(X_train, y_train)
         
-        # Log artifacts (the model)
-        with open("model.bin", "wb") as f_out:
-            pickle.dump(model, f_out)
-        mlflow.log_artifact("model.bin")
+        # Log the model correctly for the Registry
+        mlflow.sklearn.log_model(model, artifact_path="model")
         
         # Evaluate
         y_pred = model.predict(X_val)
