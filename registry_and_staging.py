@@ -50,6 +50,10 @@ def main():
         y_pred = model.predict(X_test)
         rmse = root_mean_squared_error(y_test, y_pred)
         
+        # Log the March RMSE back to the original run so it's visible in the UI
+        with mlflow.start_run(run_id=run_id):
+            mlflow.log_metric("march_rmse", rmse)
+        
         print(f"Model from {exp_name} (Run {run_id}) - March RMSE: {rmse:.4f}")
         
         # 3. Register the model version
