@@ -1,1 +1,21 @@
-/practice_4_roadmap.md
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+Scripts/
+
+# MLflow
+mlruns/
+mlflow.db
+mlflow.db.wal
+artifacts/
+
+# Data
+*.parquet
+*.csv
+
+# OS
+.DS_Store
+Thumbs.db
